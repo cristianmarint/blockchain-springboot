@@ -60,6 +60,6 @@ tasks.withType(JavaCompile) {
             '-Amapstruct.suppressGeneratorTimestamp=true'
     ]
 }
-tasks.named('wrapper') {
-  gradleVersion = '6.9.1'
- }
+//tasks.named('wrapper') {
+//  gradleVersion = '6.9.1'
+// }
