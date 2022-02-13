@@ -4,7 +4,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-undertow:2.6.2'
 	implementation project( ':api-rest')
 	implementation project( ':rest-consumer')
-	implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation group: 'com.google.guava', name: 'guava', version: '23.3-android'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '3.0.5.RELEASE'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation project(':model')
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
@@ -17,5 +20,5 @@ task explodedJar(type: Copy) {
 }
 
 configurations{
-	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
+//	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
 }

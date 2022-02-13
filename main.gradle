@@ -1,6 +1,6 @@
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
@@ -11,7 +11,7 @@ subprojects {
     apply plugin: 'jacoco'
     apply plugin: 'io.spring.dependency-management'
 
-    compileJava.dependsOn validateStructure
+//    compileJava.dependsOn validateStructure
     sourceCompatibility = JavaVersion.VERSION_11
 
     dependencies {
