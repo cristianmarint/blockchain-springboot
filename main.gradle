@@ -54,12 +54,15 @@ task jacocoMergedReport(type: JacocoReport) {
         html.enabled true
     }
 }
+tasks.register('stage'){
+    defaultTasks 'bootJar'
+}
 
 tasks.withType(JavaCompile) {
     options.compilerArgs = [
             '-Amapstruct.suppressGeneratorTimestamp=true'
     ]
 }
-//tasks.named('wrapper') {
-//  gradleVersion = '6.9.1'
-// }
+tasks.named('wrapper') {
+  gradleVersion = '6.9.1'
+ }
