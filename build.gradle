@@ -29,4 +29,7 @@ sonarqube {
     }
 }
 
+task stage() {
+    dependsOn
+}
 apply from: './main.gradle'
