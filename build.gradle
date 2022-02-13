@@ -30,7 +30,7 @@ sonarqube {
 }
 
 task stage() {
-    dependsOn
+    dependsOn bootJar
 }
 tasks.named('wrapper') {
     gradleVersion = '6.9.1'
