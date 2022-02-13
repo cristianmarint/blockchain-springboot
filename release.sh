@@ -1,2 +1,2 @@
 #!/bin/bash
-./gradlew boot
+./gradlew build || ls ./applications/app-service/build/libs/
