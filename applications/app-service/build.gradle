@@ -11,6 +11,7 @@ dependencies {
     implementation project(':model')
     implementation project(':usecase')
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '5.3.15'
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
 }
 
@@ -20,5 +21,5 @@ task explodedJar(type: Copy) {
 }
 
 configurations{
-//	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
+	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
 }

@@ -1,8 +1,10 @@
 package roll.the.block.usecase.mineblock;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import roll.the.block.model.block.Block;
-import lombok.RequiredArgsConstructor;
 import roll.the.block.model.mine.Mine;
 import roll.the.block.usecase.blockchain.BlockchainUseCase;
 import roll.the.block.usecase.util.BlockProofOfWorkGenerator;
@@ -18,17 +20,28 @@ import java.util.UUID;
  * @project RollTheBlock
  * @since v1.0.0 - feb. 2022
  */
-@RequiredArgsConstructor
+@Service
 public class MineBlockUseCase {
 
+    private final BlockchainUseCase blockchain;
+
+    private ObjectMapper mapper;
+
     @Autowired
-    private BlockchainUseCase blockchain;
+    public MineBlockUseCase(
+            BlockchainUseCase blockchain,
+            ObjectMapper mapper
+    ) {
+        this.blockchain = blockchain;
+        this.mapper = mapper;
+    }
 
     public static final String NODE_ID = UUID.randomUUID().toString().replace("-", "");
     public static final String NODE_ACCOUNT_ADDRESS = "0";
     public static final BigDecimal MINING_CASH_AWARD = BigDecimal.ONE;
 
-    public Mine calculeBlock() {
+
+    public Mine calculeBlock() throws JsonProcessingException {
 
         // (1) - Calculate the Proof of Work
         Block lastBlock = blockchain.lastBlock();

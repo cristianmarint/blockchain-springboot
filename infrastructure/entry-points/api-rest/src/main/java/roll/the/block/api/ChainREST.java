@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import roll.the.block.api.models.GenericResponse;
-import roll.the.block.model.mine.Mine;
-import roll.the.block.usecase.mineblock.MineBlockUseCase;
+import roll.the.block.model.chain.Chain;
+import roll.the.block.usecase.chain.ChainUseCase;
 
-import static roll.the.block.api.constants.Endpoints.URL_MINE_V1;
+import static roll.the.block.api.constants.Endpoints.URL_CHAIN_V1;
 
 /**
- * MineREST class
+ * ChainREST class
  *
  * @author cristianmarint
  * @project RollTheBlock
@@ -22,23 +22,23 @@ import static roll.the.block.api.constants.Endpoints.URL_MINE_V1;
  */
 @RestController
 @ResponseBody
-@RequestMapping(value = URL_MINE_V1, produces = MediaType.APPLICATION_JSON_VALUE)
-public class MineREST {
+@RequestMapping(value = URL_CHAIN_V1, produces = MediaType.APPLICATION_JSON_VALUE)
+public class ChainREST {
 
-    private final MineBlockUseCase mineBlockUseCase;
+    private final ChainUseCase chainUseCase;
 
-    public MineREST(
-            @Autowired MineBlockUseCase mineBlockUseCase
+    public ChainREST(
+            @Autowired ChainUseCase chainUseCase
     ) {
-        this.mineBlockUseCase = mineBlockUseCase;
+        this.chainUseCase = chainUseCase;
     }
 
     @GetMapping
-    public GenericResponse mineBlock() throws JsonProcessingException {
+    public GenericResponse fullChain() throws JsonProcessingException {
 
-        Mine calculeBlock = mineBlockUseCase.calculeBlock();
+        Chain chain = chainUseCase.getFullChain();
         return GenericResponse.builder()
-                .data(calculeBlock)
+                .data(chain)
                 .build();
     }
 }

@@ -2,6 +2,8 @@ package roll.the.block.usecase.util;
 
 import java.nio.charset.StandardCharsets;
 
+import com.google.common.hash.Hashing;
+
 /**
  * BlockProofOfWorkGenerator class
  *

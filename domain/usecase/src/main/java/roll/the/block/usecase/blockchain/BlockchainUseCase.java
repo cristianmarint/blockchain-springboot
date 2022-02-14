@@ -3,6 +3,7 @@ package roll.the.block.usecase.blockchain;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import roll.the.block.model.block.Block;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Slf4j
 @Service
 public class BlockchainUseCase {
     private List<Block> chain;
