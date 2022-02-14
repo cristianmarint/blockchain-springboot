@@ -2,4 +2,5 @@ dependencies {
     implementation group: 'com.google.guava', name: 'guava', version: '23.3-android'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.15'
 }

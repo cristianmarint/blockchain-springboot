@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import roll.the.block.model.block.Block;
+import roll.the.block.model.block.gateways.BlockRepository;
 import roll.the.block.model.mine.Mine;
 import roll.the.block.usecase.blockchain.BlockchainUseCase;
 import roll.the.block.usecase.util.BlockProofOfWorkGenerator;
@@ -23,28 +24,27 @@ import java.util.UUID;
 @Service
 public class MineBlockUseCase {
 
-    private final BlockchainUseCase blockchain;
-
-    private ObjectMapper mapper;
-
-    @Autowired
-    public MineBlockUseCase(
-            BlockchainUseCase blockchain,
-            ObjectMapper mapper
-    ) {
-        this.blockchain = blockchain;
-        this.mapper = mapper;
-    }
-
     public static final String NODE_ID = UUID.randomUUID().toString().replace("-", "");
     public static final String NODE_ACCOUNT_ADDRESS = "0";
     public static final BigDecimal MINING_CASH_AWARD = BigDecimal.ONE;
-
+    private final BlockRepository blockRepository;
+    private final BlockchainUseCase blockchain;
+    private ObjectMapper mapper;
+    @Autowired
+    public MineBlockUseCase(
+            BlockchainUseCase blockchain,
+            ObjectMapper mapper,
+            BlockRepository blockRepository
+    ) {
+        this.blockchain = blockchain;
+        this.mapper = mapper;
+        this.blockRepository = blockRepository;
+    }
 
     public Mine calculeBlock() throws JsonProcessingException {
 
         // (1) - Calculate the Proof of Work
-        Block lastBlock = blockchain.lastBlock();
+        Block lastBlock = blockRepository.getLastBlock();
 
         Long lastProof = lastBlock.getProof();
 

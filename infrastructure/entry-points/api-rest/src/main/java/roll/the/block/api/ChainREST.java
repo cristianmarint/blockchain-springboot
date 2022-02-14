@@ -1,6 +1,5 @@
 package roll.the.block.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +33,7 @@ public class ChainREST {
     }
 
     @GetMapping
-    public GenericResponse fullChain() throws JsonProcessingException {
+    public GenericResponse fullChain() {
 
         Chain chain = chainUseCase.getFullChain();
         return GenericResponse.builder()

@@ -1,18 +1,18 @@
 buildscript {
-	ext {
+    ext {
 //		cleanArchitectureVersion = '2.2.2'
-		springBootVersion = '2.6.2'
-		sonarVersion = '3.0'
-		jacocoVersion = '0.8.5'
+        springBootVersion = '2.6.2'
+        sonarVersion = '3.0'
+        jacocoVersion = '0.8.5'
         lombokVersion = '1.18.22'
-	}
+    }
 }
 
 plugins {
 //	id 'co.com.bancolombia.cleanArchitecture' version "${cleanArchitectureVersion}"
-	id 'org.springframework.boot' version "${springBootVersion}"
-	id 'org.sonarqube' version "${sonarVersion}"
-	id 'jacoco'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'org.sonarqube' version "${sonarVersion}"
+    id 'jacoco'
 }
 
 sonarqube {

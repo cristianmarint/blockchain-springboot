@@ -2,8 +2,8 @@ package roll.the.block.usecase.chain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import roll.the.block.model.block.gateways.BlockRepository;
 import roll.the.block.model.chain.Chain;
-import roll.the.block.usecase.blockchain.BlockchainUseCase;
 
 /**
  * ChainUseCase class
@@ -15,19 +15,19 @@ import roll.the.block.usecase.blockchain.BlockchainUseCase;
 @Service
 public class ChainUseCase {
 
-    private final BlockchainUseCase blockchain;
+    private final BlockRepository blockRepository;
 
     @Autowired
     public ChainUseCase(
-            BlockchainUseCase blockchain
+            BlockRepository blockRepository
     ) {
-        this.blockchain = blockchain;
+        this.blockRepository = blockRepository;
     }
 
     public Chain getFullChain() {
         return Chain.builder()
-                .chain(blockchain.getChain())
-                .length(blockchain.getChain().size())
+                .chain(blockRepository.getGeneratedBlocks())
+                .length(Math.toIntExact(blockRepository.countBlocks()))
                 .build();
     }
 

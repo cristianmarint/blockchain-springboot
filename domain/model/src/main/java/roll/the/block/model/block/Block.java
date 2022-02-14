@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * This class represents a Block in the Blockchain. It is the most basic building
  * block of the Blockchain.
- *
+ * <p>
  * Hash should be calculated on the ordered list of attributes and hence keeping
  * them sorted to ensure that hashing is consistent.
  *
@@ -28,18 +28,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Block {
+    public static final Long GENESIS_BLOCK_PROOF = 111L;
+    public static final String GENESIS_BLOCK_PREV_HASH = "init_hash[\uD83D\uDC7B]";
     private Long index;
-
     private Long timestamp;
-
     private List<Transaction> transactions;
-
     private Long proof;
-
     private String previousHash;
-
-    public static final Long GENESIS_BLOCK_PROOF = 100L;
-    public static final String GENESIS_BLOCK_PREV_HASH = "1";
 
     public String hash(ObjectMapper mapper) throws JsonProcessingException {
         String json = mapper.writeValueAsString(this);

@@ -28,9 +28,11 @@ public final class Endpoints {
      */
     public static final String URL_STATIC_FILE_V1 = "/api/v1/static";
 
-    public static final String URL_MINE_V1 = URL_BASE_V1+"/mine";
+    public static final String URL_MINE_V1 = URL_BASE_V1 + "/mine";
 
-    public static final String URL_CHAIN_V1 = URL_BASE_V1+"/chain";
+    public static final String URL_CHAIN_V1 = URL_BASE_V1 + "/chain";
 
-    public static final String URL_TRANSACTION_V1 = URL_BASE_V1+"/transaction";
+    public static final String URL_TRANSACTION_V1 = URL_BASE_V1 + "/transaction";
+
+    public static final String URL_NODE_V1 = URL_BASE_V1 + "/node";
 }

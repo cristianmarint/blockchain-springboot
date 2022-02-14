@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import roll.the.block.model.block.Block;
+import roll.the.block.model.block.gateways.BlockRepository;
 import roll.the.block.model.transaction.Transaction;
 import roll.the.block.usecase.util.BlockProofOfWorkGenerator;
 
@@ -19,47 +20,21 @@ import java.util.List;
 @Slf4j
 @Service
 public class BlockchainUseCase {
-    private List<Block> chain;
+
+    private final ObjectMapper mapper;
+    private BlockRepository blockRepository;
     private List<Transaction> currentTransactions;
 
     @Autowired
-    private ObjectMapper mapper;
-
-    public BlockchainUseCase() throws JsonProcessingException {
-
-        chain = new ArrayList<>();
+    public BlockchainUseCase(
+            ObjectMapper mapper,
+            BlockRepository blockRepository
+    ) throws JsonProcessingException {
+        this.blockRepository = blockRepository;
+        this.mapper = mapper;
         currentTransactions = new ArrayList<>();
 
-        // Create the genesis block
         createBlock(Block.GENESIS_BLOCK_PROOF, Block.GENESIS_BLOCK_PREV_HASH);
-    }
-
-    public Long addTransaction(String sender, String recipient, BigDecimal amount) {
-
-        Transaction transaction = Transaction.builder().sender(sender).recipient(recipient).amount(amount).build();
-
-        currentTransactions.add(transaction);
-
-        return lastBlock().getIndex() + 1L;
-    }
-
-    public Block createBlock(Long proof, String previusHash) throws JsonProcessingException {
-
-        Block block = Block.builder().index(chain.size() + 1L)
-                .previousHash((previusHash != null) ? previusHash : lastBlock().hash(mapper)).proof(proof)
-                .timestamp(new Date().getTime()).transactions(currentTransactions).build();
-
-        // add new block to the chain.
-        this.chain.add(block);
-
-        // start accepting new transactions.
-        this.currentTransactions = new ArrayList<>();
-
-        return block;
-    }
-
-    public Block lastBlock() {
-        return chain.get(this.chain.size() - 1);
     }
 
     public static boolean validChain(List<Block> chain, ObjectMapper mapper) throws JsonProcessingException {
@@ -90,7 +65,30 @@ public class BlockchainUseCase {
         return true;
     }
 
+    public Long addTransaction(String sender, String recipient, BigDecimal amount) {
+
+        Transaction transaction = Transaction.builder().sender(sender).recipient(recipient).amount(amount).build();
+
+        currentTransactions.add(transaction);
+
+        return blockRepository.getLastBlock().getIndex() + 1L;
+    }
+
+    public Block createBlock(Long proof, String previusHash) throws JsonProcessingException {
+
+        Block block = Block.builder()
+                .index(blockRepository.countBlocks() + 1L)
+                .previousHash((previusHash != null) ? previusHash : blockRepository.getLastBlock().hash(mapper)).proof(proof)
+                .timestamp(new Date().getTime())
+                .transactions(currentTransactions)
+                .build();
+
+        blockRepository.addBlock(block);
+
+        return block;
+    }
+
     public boolean validChain() throws JsonProcessingException {
-        return validChain(chain, mapper);
+        return validChain(blockRepository.getGeneratedBlocks(), mapper);
     }
 }

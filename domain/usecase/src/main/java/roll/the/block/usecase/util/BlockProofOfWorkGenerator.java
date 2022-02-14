@@ -1,8 +1,8 @@
 package roll.the.block.usecase.util;
 
-import java.nio.charset.StandardCharsets;
-
 import com.google.common.hash.Hashing;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * BlockProofOfWorkGenerator class
@@ -16,12 +16,12 @@ public class BlockProofOfWorkGenerator {
 
     /**
      * Simple Proof of Work Algorithm:
-     *
+     * <p>
      * - Find a number p' such that hash(pp') contains leading 4 zeroes, where p
      * is the previous p'
-     *
+     * <p>
      * - p is the previous proof, and p' is the new proof
-     *
+     * <p>
      * Find a number p that when hashed with the previous block’s solution a
      * hash with 4 leading 0s is produced.
      */
