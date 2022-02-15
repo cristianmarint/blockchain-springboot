@@ -84,14 +84,14 @@ server:
     include-binding-errors: always
 
 logging:
-  #config: classpath:logback.xml
+#config: classpath:logback.xml
 
 ############# JKS password
 jks:
   secret:
     password: # Poner en vars
   file:
-    #extension: roll_the_block.jks
+  #extension: roll_the_block.jks
   chest:
     alias: trainate
 

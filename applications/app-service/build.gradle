@@ -1,14 +1,22 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-undertow:2.6.2'
-	implementation project( ':api-rest')
-	implementation project( ':rest-consumer')
-	implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow:2.6.2'
+    implementation project(':api-rest')
+    implementation project(':rest-consumer')
+    implementation project(':local-repository')
     implementation project(':model')
     implementation project(':usecase')
+    implementation group: 'com.google.guava', name: 'guava', version: '23.3-android'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '3.0.5.RELEASE'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '5.3.15'
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.6'
 }
 
 task explodedJar(type: Copy) {
@@ -16,6 +24,6 @@ task explodedJar(type: Copy) {
     into "${buildDir}/exploded"
 }
 
-configurations{
-	compile.exclude group: "org.springframework.boot", module:"spring-boot-starter-tomcat"
+configurations {
+    compile.exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
 }
