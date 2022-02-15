@@ -1,5 +1,7 @@
 package roll.the.block.model.transaction;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +19,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Builder(toBuilder = true)
+@JsonInclude(Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {

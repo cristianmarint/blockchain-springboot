@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import roll.the.block.api.models.GenericResponse;
 import roll.the.block.model.mine.Mine;
+import roll.the.block.model.rest.models.GenericData;
+import roll.the.block.model.rest.models.GenericResponse;
 import roll.the.block.usecase.mineblock.MineBlockUseCase;
 
-import static roll.the.block.api.constants.Endpoints.URL_MINE_V1;
+import static roll.the.block.model.constants.Endpoints.URL_MINE_V1;
 
 /**
  * MineREST class
@@ -37,8 +38,13 @@ public class MineREST {
     public GenericResponse mineBlock() throws JsonProcessingException {
 
         Mine calculeBlock = mineBlockUseCase.calculeBlock();
+
+        GenericData response = GenericData.builder()
+                .content(calculeBlock)
+                .build();
+
         return GenericResponse.builder()
-                .data(calculeBlock)
+                .data(response)
                 .build();
     }
 }

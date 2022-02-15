@@ -26,7 +26,7 @@ public class ChainUseCase {
 
     public Chain getFullChain() {
         return Chain.builder()
-                .chain(blockRepository.getGeneratedBlocks())
+                .chain(blockRepository.getBlocks())
                 .length(Math.toIntExact(blockRepository.countBlocks()))
                 .build();
     }

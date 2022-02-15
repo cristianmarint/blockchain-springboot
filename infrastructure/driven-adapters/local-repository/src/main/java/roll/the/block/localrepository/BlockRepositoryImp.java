@@ -1,36 +1,36 @@
-package roll.the.block.model.block.gateways;
+package roll.the.block.localrepository;
 
-import org.springframework.stereotype.Repository;
 import roll.the.block.model.block.Block;
+import roll.the.block.model.block.gateways.BlockRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class BlockRepositoryImp implements BlockRepository {
-    private List<Block> blocksStored;
+
+    private List<Block> blocks;
 
     public BlockRepositoryImp() {
-        blocksStored = new ArrayList<>();
+        blocks = new ArrayList<>();
     }
 
     @Override
-    public List<Block> getGeneratedBlocks() {
-        return blocksStored;
+    public List<Block> getBlocks() {
+        return blocks;
     }
 
     @Override
     public Integer countBlocks() {
-        return blocksStored.size();
+        return blocks.size();
     }
 
     @Override
     public void addBlock(Block block) {
-        blocksStored.add(block);
+        blocks.add(block);
     }
 
     @Override
     public Block getLastBlock() {
-        return blocksStored.get(blocksStored.size() - 1);
+        return blocks.get(blocks.size() - 1);
     }
 }

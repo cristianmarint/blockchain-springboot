@@ -1,5 +1,7 @@
 package roll.the.block.model.mine;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +19,7 @@ import java.util.List;
  * @since v1.0.0 - feb. 2022
  */
 @Data
+@JsonInclude(Include.NON_NULL)
 @Builder
 @ToString
 @AllArgsConstructor

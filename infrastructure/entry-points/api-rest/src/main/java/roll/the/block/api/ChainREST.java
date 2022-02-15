@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import roll.the.block.api.models.GenericResponse;
+import roll.the.block.model.rest.models.GenericData;
+import roll.the.block.model.rest.models.GenericResponse;
 import roll.the.block.model.chain.Chain;
 import roll.the.block.usecase.chain.ChainUseCase;
 
-import static roll.the.block.api.constants.Endpoints.URL_CHAIN_V1;
+import static roll.the.block.model.constants.Endpoints.URL_CHAIN_V1;
 
 /**
  * ChainREST class
@@ -36,8 +37,14 @@ public class ChainREST {
     public GenericResponse fullChain() {
 
         Chain chain = chainUseCase.getFullChain();
+
+        GenericData response = GenericData.builder()
+                .message("Current chain")
+                .content(chain)
+                .build();
+
         return GenericResponse.builder()
-                .data(chain)
+                .data(response)
                 .build();
     }
 }

@@ -1,5 +1,7 @@
 package roll.the.block.model.block;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.hash.Hashing;
@@ -24,6 +26,7 @@ import java.util.List;
  * @since v1.0.0 - feb. 2022
  */
 @Data
+@JsonInclude(Include.NON_NULL)
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

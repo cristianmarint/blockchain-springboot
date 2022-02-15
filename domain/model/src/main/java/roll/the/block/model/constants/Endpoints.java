@@ -1,4 +1,4 @@
-package roll.the.block.api.constants;
+package roll.the.block.model.constants;
 
 import lombok.NoArgsConstructor;
 
@@ -35,4 +35,16 @@ public final class Endpoints {
     public static final String URL_TRANSACTION_V1 = URL_BASE_V1 + "/transaction";
 
     public static final String URL_NODE_V1 = URL_BASE_V1 + "/node";
+
+    public static final String[] URL_OPENAPI_WHITE_LIST = {
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+    };
 }
