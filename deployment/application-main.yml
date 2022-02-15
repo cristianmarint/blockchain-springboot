@@ -1,0 +1,110 @@
+roll-the-block:
+  appid: ROLL THE BLOCK
+  url: https://roll-the-block-main.herokuapp.com
+  token:
+    validity:
+      days: 2
+
+spring:
+  mvc:
+    favicon:
+      enable: false
+
+  mail:
+    host: smtp.gmail.com
+    username:
+    password:
+    properties:
+      mail:
+        transport:
+          protocol: stmp
+        smtp:
+          port: 587
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    debug: true
+
+  activemq:
+    broker-url:
+    non-blocking-redelivery: true
+    pool:
+      block-if-full: true
+      block-if-full-timeout: -1
+      idle-timeout: 30000
+      max-sessions-per-connection: 500
+
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+  profiles:
+    active: dev
+
+  main:
+    allow-bean-definition-overriding: true
+
+  application:
+    name: roll-the-block
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 128MB
+
+  jpa:
+    show-sql: false
+
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: # poner en vars jdbc:mysql://b71af34a2c64e9:7ba7669a@us-cdbr-east-04.cleardb.com/heroku_f9225626bc09a57?reconnect=true
+#    jdbcUrl: ${spring.datasource.url}
+#    username:
+#    password:
+#    hikari:
+#      connection-timeout: 20000
+#      minimum-idle: 100
+#      idle-timeout: 100000
+#      max-lifetime: 1800000
+
+  #  ACTUATOR
+  security:
+    user:
+      name: admin
+      password: #poener en vars roll-the-block-admin
+
+############ Server config
+server:
+  port: $PORT
+  error:
+    include-message: always
+    include-exception: true
+    include-stacktrace: never
+    include-binding-errors: always
+
+logging:
+#config: classpath:logback.xml
+
+############# JKS password
+jks:
+  secret:
+    password: # Poner en vars
+  file:
+  #extension: roll_the_block.jks
+  chest:
+    alias: trainate
+
+############# Jwt expiration time
+jwt:
+  expiration:
+    time: 9000000
+
+encryption:
+  salt: 123
+email:
+  sender: cristianmarint@mail.com
+  verification:
+    url: https://roll-the-block-main.herokuapp.com
+  url:
+    auth: ${email.verification.url}/auth
