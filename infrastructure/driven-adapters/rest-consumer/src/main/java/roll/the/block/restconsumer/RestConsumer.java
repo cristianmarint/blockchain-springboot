@@ -6,7 +6,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import roll.the.block.model.rest.models.GenericResponse;
 
@@ -17,7 +16,7 @@ import java.io.IOException;
 public class RestConsumer// implements Gateway from domain
 {
 
-    @Value("${adapter.restconsumer.url}")
+//    @Value("${adapter.restconsumer.url}")
     private String url;
     private final OkHttpClient client;
     private final ObjectMapper mapper;
