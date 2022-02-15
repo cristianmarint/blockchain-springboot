@@ -56,17 +56,17 @@ spring:
   jpa:
     show-sql: false
 
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: # poner en vars jdbc:mysql://b71af34a2c64e9:7ba7669a@us-cdbr-east-04.cleardb.com/heroku_f9225626bc09a57?reconnect=true
-    jdbcUrl: ${spring.datasource.url}
-    username:
-    password:
-    hikari:
-      connection-timeout: 20000
-      minimum-idle: 100
-      idle-timeout: 100000
-      max-lifetime: 1800000
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: # poner en vars jdbc:mysql://b71af34a2c64e9:7ba7669a@us-cdbr-east-04.cleardb.com/heroku_f9225626bc09a57?reconnect=true
+#    jdbcUrl: ${spring.datasource.url}
+#    username:
+#    password:
+#    hikari:
+#      connection-timeout: 20000
+#      minimum-idle: 100
+#      idle-timeout: 100000
+#      max-lifetime: 1800000
 
   #  ACTUATOR
   security:
