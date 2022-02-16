@@ -24,9 +24,14 @@ public class ChainUseCase {
         this.blockRepository = blockRepository;
     }
 
+    /**
+     * Show the complete latest full blockchain
+     *
+     * @return the current full chain
+     */
     public Chain getFullChain() {
         return Chain.builder()
-                .chain(blockRepository.getBlocks())
+                .blocks(blockRepository.getBlocks())
                 .length(Math.toIntExact(blockRepository.countBlocks()))
                 .build();
     }

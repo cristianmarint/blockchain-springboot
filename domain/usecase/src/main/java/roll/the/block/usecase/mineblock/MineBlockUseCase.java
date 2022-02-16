@@ -25,11 +25,12 @@ import java.util.UUID;
 public class MineBlockUseCase {
 
     public static final String NODE_ID = UUID.randomUUID().toString().replace("-", "");
-    public static final String NODE_ACCOUNT_ADDRESS = "0";
+    public static final String NODE_ACCOUNT_ADDRESS = "NodeMinerAddress";
     public static final BigDecimal MINING_CASH_AWARD = BigDecimal.ONE;
     private final BlockRepository blockRepository;
     private final BlockchainUseCase blockchain;
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
+
     @Autowired
     public MineBlockUseCase(
             BlockchainUseCase blockchain,
@@ -41,6 +42,12 @@ public class MineBlockUseCase {
         this.blockRepository = blockRepository;
     }
 
+    /**
+     * Forge the new Block by adding it to the chain
+     *
+     * @return Mine a new mine block
+     * @throws JsonProcessingException when creating hash fails
+     */
     public Mine calculeBlock() throws JsonProcessingException {
 
         // (1) - Calculate the Proof of Work

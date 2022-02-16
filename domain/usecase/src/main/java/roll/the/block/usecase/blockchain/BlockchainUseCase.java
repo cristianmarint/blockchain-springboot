@@ -32,7 +32,10 @@ import static roll.the.block.model.constants.Endpoints.URL_CHAIN_V1;
 public class BlockchainUseCase {
 
     private final ObjectMapper mapper;
+
+    //    TODO: Crear repository
     private final List<Transaction> currentTransactions;
+
     private final BlockRepository blockRepository;
     private final NodeRepository nodeRepository;
     private final ChainRestTemplate restTemplateRepository;
@@ -59,21 +62,21 @@ public class BlockchainUseCase {
     /**
      * Determine if a given blockchain is valid
      *
-     * @param chain  A blockchain
-     * @param mapper
+     * @param blocks A valid blocks
+     * @param mapper object mapper
      * @return True if valid, False if not
-     * @throws JsonProcessingException
+     * @throws JsonProcessingException when validation hash
      */
-    public static boolean validChain(List<Block> chain, ObjectMapper mapper) throws JsonProcessingException {
+    public static boolean validateBlocks(List<Block> blocks, ObjectMapper mapper) throws JsonProcessingException {
 
-        if (chain == null || chain.isEmpty())
+        if (blocks == null || blocks.isEmpty())
             return false;
 
-        Block lastBlock = chain.get(0);
+        Block lastBlock = blocks.get(0);
 
-        for (int currentIndex = 1; currentIndex < chain.size(); currentIndex++) {
+        for (int currentIndex = 1; currentIndex < blocks.size(); currentIndex++) {
 
-            Block currentBlock = chain.get(currentIndex);
+            Block currentBlock = blocks.get(currentIndex);
 
             log.debug("lastBlock={}", lastBlock);
             log.debug("currentBlock={}", currentBlock);
@@ -92,6 +95,14 @@ public class BlockchainUseCase {
         return true;
     }
 
+    /**
+     * Creates a new transaction to go into the next mined Block
+     *
+     * @param sender    Address of the Sender
+     * @param recipient Address of the Recipient
+     * @param amount    Amount
+     * @return The index of the Block that will hold this transaction
+     */
     public Long addTransaction(String sender, String recipient, BigDecimal amount) {
 
         Transaction transaction = Transaction.builder().sender(sender).recipient(recipient).amount(amount).build();
@@ -101,11 +112,19 @@ public class BlockchainUseCase {
         return blockRepository.getLastBlock().getIndex() + 1L;
     }
 
-    public Block createBlock(Long proof, String previusHash) throws JsonProcessingException {
+    /**
+     * Create a new Block in the Blockchain
+     *
+     * @param proof        The proof given by the Proof of Work algorithm
+     * @param previousHash Hash of previous Block
+     * @return New Block
+     * @throws JsonProcessingException when validation hash
+     */
+    public Block createBlock(Long proof, String previousHash) throws JsonProcessingException {
 
         Block block = Block.builder()
                 .index(blockRepository.countBlocks() + 1L)
-                .previousHash((previusHash != null) ? previusHash : blockRepository.getLastBlock().hash(mapper)).proof(proof)
+                .previousHash((previousHash != null) ? previousHash : blockRepository.getLastBlock().hash(mapper)).proof(proof)
                 .timestamp(new Date().getTime())
                 .transactions(currentTransactions)
                 .build();
@@ -115,30 +134,43 @@ public class BlockchainUseCase {
         return block;
     }
 
-    public boolean validChain() throws JsonProcessingException {
-        return validChain(blockRepository.getBlocks(), mapper);
+    /**
+     * Determine if a given blockchain is valid
+     *
+     * @return True if valid, False if not
+     * @throws JsonProcessingException when validation hash
+     */
+    @SuppressWarnings("unused")
+    public boolean validateBlocks() throws JsonProcessingException {
+        return validateBlocks(blockRepository.getBlocks(), mapper);
     }
 
     /**
-     * This is our consensus algorithm, it resolves conflicts by replacing our chain with the longest one in the network.
+     * This is our consensus algorithm, it resolves conflicts by
+     * replacing our chain with the longest one in the network.
      *
-     * @param nodes
+     * @param nodes list of registered nodes
      * @return True if our chain was replaced, False if not
+     * @throws java.net.URISyntaxException when node url is invalid
+     * @throws java.io.IOException         when can't request to others nodes or
      */
     public Boolean resolveConflicts(Set<Node> nodes) throws URISyntaxException, IOException {
-        Set<Chain> newChain = null;
-        int maxLength = nodes.size();
+        Chain newChain = null;
+        int maxLength = chainRepository.getChain().getLength();
 
         for (Node node : nodes) {
-            Set<Chain> response = restTemplateRepository.requestChain(node.getAddress().toURI() + URL_CHAIN_V1);
+            Chain response = restTemplateRepository.requestChain(node.getAddress().toURI() + URL_CHAIN_V1);
 
             if (response != null) {
-                int length = response.size();
-                Set<Chain> chain = response;
+                int length = response.getLength();
+                List<Block> blocks = response.getBlocks();
 
-                if (length > maxLength) {
+                if (length > maxLength && validateBlocks(blocks, mapper)) {
                     maxLength = length;
-                    newChain = chain;
+
+                    newChain = new Chain();
+                    newChain.setLength(maxLength);
+                    newChain.setBlocks(blocks);
                 }
             }
         }

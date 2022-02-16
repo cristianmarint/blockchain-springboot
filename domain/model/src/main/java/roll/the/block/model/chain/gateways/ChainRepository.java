@@ -3,8 +3,6 @@ package roll.the.block.model.chain.gateways;
 import org.springframework.stereotype.Repository;
 import roll.the.block.model.chain.Chain;
 
-import java.util.Set;
-
 /**
  * ChainRepository class
  *
@@ -14,5 +12,7 @@ import java.util.Set;
  */
 @Repository
 public interface ChainRepository {
-    void resetChain(Set<Chain> newChain);
+    void resetChain(Chain newChain);
+
+    Chain getChain();
 }

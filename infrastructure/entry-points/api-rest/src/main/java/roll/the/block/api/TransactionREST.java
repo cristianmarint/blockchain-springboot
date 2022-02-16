@@ -37,6 +37,12 @@ public class TransactionREST {
         this.transactionUseCase = transactionUseCase;
     }
 
+    /**
+     * Creates a new transaction to go into the next mined Block
+     *
+     * @param transaction incoming transaction
+     * @return The index of the Block that will hold this transaction
+     */
     @PostMapping
     public GenericResponse createTransaction(@RequestBody @Valid Transaction transaction) throws JsonProcessingException {
 

@@ -3,9 +3,6 @@ package roll.the.block.localrepository;
 import roll.the.block.model.chain.Chain;
 import roll.the.block.model.chain.gateways.ChainRepository;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * ChainRepositoryImp class
  *
@@ -15,14 +12,19 @@ import java.util.Set;
  */
 public class ChainRepositoryImp implements ChainRepository {
 
-    private Set<Chain> chain;
+    private Chain chain;
 
-    public ChainRepositoryImp(){
-        this.chain = new HashSet<>();
+    public ChainRepositoryImp() {
+        this.chain = new Chain();
     }
 
     @Override
-    public void resetChain(Set<Chain> newChain) {
+    public void resetChain(Chain newChain) {
         chain = newChain;
+    }
+
+    @Override
+    public Chain getChain() {
+        return chain;
     }
 }

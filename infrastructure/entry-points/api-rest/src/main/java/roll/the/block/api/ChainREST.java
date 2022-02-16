@@ -33,6 +33,11 @@ public class ChainREST {
         this.chainUseCase = chainUseCase;
     }
 
+    /**
+     * Show the complete latest full blockchain
+     *
+     * @return the current full chain
+     */
     @GetMapping
     public GenericResponse fullChain() {
 

@@ -26,5 +26,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Chain {
     private Integer length;
-    private List<Block> chain;
+    private List<Block> blocks;
 }

@@ -8,4 +8,6 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
+
+    implementation group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.1.12'
 }
