@@ -4,8 +4,12 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SwaggerConfig class
@@ -19,6 +23,7 @@ public class OpenAPIConfig {
     @Bean
     public OpenAPI createOpenAPIConfig() {
         return new OpenAPI()
+                .servers(getServers())
                 .info(new Info()
                         .title("Roll The Block")
                         .version("V1.0.0")
@@ -36,5 +41,13 @@ public class OpenAPIConfig {
                         )
                         .termsOfService("https://github.com/cristianmarint/blockchain-springboot/blob/main/LICENSE")
                 );
+    }
+
+    private List<Server> getServers() {
+        List<Server> servers = new ArrayList<>();
+        servers.add(new Server().url("https://roll-the-block.herokuapp.com/"));
+        servers.add(new Server().url("https://roll-the-block-develop.herokuapp.com/"));
+        servers.add(new Server().url("http://localhost:8080/"));
+        return servers;
     }
 }
