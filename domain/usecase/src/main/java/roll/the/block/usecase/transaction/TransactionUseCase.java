@@ -25,7 +25,13 @@ public class TransactionUseCase {
         this.blockchain = blockchain;
     }
 
-    public Long createTransaction(Transaction trans) throws JsonProcessingException {
-        return blockchain.addTransaction(trans.getSender(), trans.getRecipient(), trans.getAmount());
+    /**
+     * Creates a new transaction to go into the next mined Block
+     *
+     * @param transaction incoming transaction
+     * @return The index of the Block that will hold this transaction
+     */
+    public Long createTransaction(Transaction transaction) throws JsonProcessingException {
+        return blockchain.addTransaction(transaction.getSender(), transaction.getRecipient(), transaction.getAmount());
     }
 }

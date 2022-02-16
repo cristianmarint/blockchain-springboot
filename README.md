@@ -1,56 +1,114 @@
-# Proyecto Base Implementando Clean Architecture
+# ROLL THE BLOCK (OR BLOCKCHAIN)
 
-## Antes de Iniciar
+One Paragraph of project description goes here
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando
-con los componentes core de negocio (dominio) y por �ltimo el inicio y configuraci�n de la aplicaci�n.
 
-Lee el
-art�culo [Clean Architecture � Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+## Summary 📋
 
-# Arquitectura
+- [Getting Started](#getting-started)
+- [Runing the tests](#running-the-tests)
+- [Deployment](#deployment)
+- [Built With](#built-with)
+- [Contributing](#contributing)
+- [Versioning](#versioning)
+- [Authors](#authors)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
-![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
+## GettingStarted 🚀
 
-## Domain
+These instructions will get you a copy of the project up and running on
+your local machine for development and testing purposes. See deployment
+for notes on how to deploy the project on a live system.
 
-Es el m�dulo m�s interno de la arquitectura, pertenece a la capa del dominio y encapsula la l�gica y reglas del negocio
-mediante modelos y entidades del dominio.
+### Prerequisites
 
-## Usecases
+What things you need to install the software and how to install them
 
-Este m�dulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define l�gica de
-aplicaci�n y reacciona a las invocaciones desde el m�dulo de entry points, orquestando los flujos hacia el m�dulo de
-entities.
+* Java 11
+* IntelliJ is highly recommended
 
-## Infrastructure
+### Installing
 
-### Helpers
+A step by step series of examples that tell you how to get a development
+env running
 
-En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
+1. Clone repo
+2. Open with IntelliJ 
+3. Run the project
+4. Import the Postman Collection
+5. Run '1 Mine'
 
-Estas utilidades no est�n arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-gen�ricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patr�n de
-dise�o [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+And you will get
 
-Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
+```
+{
+    "data": {
+        "content": {
+            "message": "New Block Forged",
+            "index": 2,
+            "transactions": [
+                {
+                    "sender": "NodeMinerAddress",
+                    "recipient": "60bf9a29e94e46fe9364c01d2ce535f7",
+                    "amount": 1
+                }
+            ],
+            "proof": 45972,
+            "previousHsh": "84e2906ec60603ef54719c27b0c15769f6c6931007474eae8b0e4ff81cf0c33e"
+        }
+    }
+}
+```
 
-### Driven Adapters
+## Running the tests
 
-Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
-soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
-interactuar.
+Use gradle to run tests
 
-### Entry Points
+### Break down into end to end tests
 
-Los entry points representan los puntos de entrada de la aplicaci�n o el inicio de los flujos de negocio.
+    ~~Will be added later~~
 
-## Application
+## Deployment
 
-Este m�dulo es el m�s externo de la arquitectura, es el encargado de ensamblar los distintos m�dulos, resolver las
-dependencias y crear los beans de los casos de use (UseCases) de forma autom�tica, inyectando en �stos instancias
-concretas de las dependencias declaradas. Adem�s inicia la aplicaci�n (es el �nico m�dulo del proyecto donde
-encontraremos la funci�n �public static void main(String[] args)�.
+You can use Heroku to deploy this project, remember to create
+the required variables in Procfile
 
-**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+## Built With
+
+- [Contributor Covenant](https://www.contributor-covenant.org/) - Used
+  for the Code of Conduct
+- [Creative Commons](https://creativecommons.org/) - Used to choose
+  the license
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code
+of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions
+available, see the [tags on this
+repository](https://github.com/cristianmarint/roll-the-block/tags).
+
+## Authors
+
+- **Cristian Marín** -
+  [cristianmarint](https://github.com/cristianmarint)
+- **Daniel van Flymen** -
+  [Python approach codebase](https://github.com/dvf/blockchain-book) - [Article](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)
+
+See also the list of
+[contributors](https://github.com/cristianmarint/THIS.REPO/contributors)
+who participated in this project.
+
+## License
+
+This project is licensed under the [CC0 1.0 Universal](LICENSE.md)
+Creative Commons License - see the [LICENSE.md](LICENSE.md) file for
+details
+
+## Acknowledgments
+
+- It's not perfect but the repo is open for improvement

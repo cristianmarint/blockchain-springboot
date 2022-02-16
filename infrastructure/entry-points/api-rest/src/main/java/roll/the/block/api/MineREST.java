@@ -34,6 +34,12 @@ public class MineREST {
         this.mineBlockUseCase = mineBlockUseCase;
     }
 
+    /**
+     * Forge the new Block by adding it to the chain
+     *
+     * @return Mine a new mine block
+     * @throws JsonProcessingException when creating hash fails
+     */
     @GetMapping
     public GenericResponse mineBlock() throws JsonProcessingException {
 

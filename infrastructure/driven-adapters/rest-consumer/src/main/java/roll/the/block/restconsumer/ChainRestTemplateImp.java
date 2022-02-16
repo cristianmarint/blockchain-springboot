@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import roll.the.block.model.chain.Chain;
 import roll.the.block.model.chain.gateways.ChainRestTemplate;
+import roll.the.block.model.rest.models.GenericResponse;
 
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * ChainRestTemplateImp class
@@ -28,8 +28,8 @@ public class ChainRestTemplateImp implements ChainRestTemplate {
     }
 
     @Override
-    public Set<Chain> requestChain(String uri) throws IOException {
-        restConsumer.requestGet(uri);
-        return null;
+    public Chain requestChain(String uri) throws IOException {
+        GenericResponse genericResponse = restConsumer.requestGet(uri);
+        return (Chain) genericResponse.getData().getContent();
     }
 }

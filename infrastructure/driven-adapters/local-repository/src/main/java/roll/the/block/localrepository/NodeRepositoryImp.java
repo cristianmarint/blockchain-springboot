@@ -17,7 +17,7 @@ public class NodeRepositoryImp implements NodeRepository {
 
     private Set<Node> nodes;
 
-    public NodeRepositoryImp(){
+    public NodeRepositoryImp() {
         nodes = new HashSet<>();
     }
 

@@ -44,16 +44,24 @@ public class NodeUseCase {
      * @throws IllegalArgumentException when Nodes are empty
      */
     public Set<Node> registerNode(Set<Node> nodes) throws IllegalArgumentException {
-        if (nodes.isEmpty()){
+        if (nodes.isEmpty()) {
             throw new IllegalArgumentException("Nodes are empty");
         }
 
-        for (Node node: nodes) {
-             blockchain.registerNode(node);
+        for (Node node : nodes) {
+            blockchain.registerNode(node);
         }
         return nodeRepository.getBlocks();
     }
 
+    /**
+     * This is our consensus algorithm, it resolves conflicts by
+     * replacing our chain with the longest one in the network.
+     *
+     * @return True if our chain was replaced, False if not
+     * @throws java.net.URISyntaxException when node url is invalid
+     * @throws java.io.IOException         when can't request to others nodes or
+     */
     public NodeMessage resolveConflict() throws URISyntaxException, IOException {
         Set<Node> nodes = nodeRepository.getBlocks();
         boolean resolved = blockchain.resolveConflicts(nodes);
@@ -62,9 +70,9 @@ public class NodeUseCase {
                 .nodes(nodes)
                 .build();
 
-        if (resolved){
+        if (resolved) {
             nodeMessage.setMessage("Our chain was replaced");
-        }else {
+        } else {
             nodeMessage.setMessage("Our chain is authoritative");
         }
 

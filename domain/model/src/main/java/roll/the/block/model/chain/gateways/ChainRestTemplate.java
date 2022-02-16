@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import roll.the.block.model.chain.Chain;
 
 import java.io.IOException;
-import java.util.Set;
 
 /**
  * ChainRestTemplateRepository class
@@ -16,5 +15,5 @@ import java.util.Set;
 @Service
 public interface ChainRestTemplate {
 
-    Set<Chain> requestChain(String s) throws IOException;
+    Chain requestChain(String s) throws IOException;
 }
