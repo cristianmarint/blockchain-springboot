@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import roll.the.block.model.chain.Chain;
 import roll.the.block.model.rest.models.GenericData;
 import roll.the.block.model.rest.models.GenericResponse;
-import roll.the.block.model.chain.Chain;
 import roll.the.block.usecase.chain.ChainUseCase;
 
 import static roll.the.block.model.constants.Endpoints.URL_CHAIN_V1;
