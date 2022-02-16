@@ -16,10 +16,10 @@ import java.io.IOException;
 public class RestConsumer// implements Gateway from domain
 {
 
-//    @Value("${adapter.restconsumer.url}")
-    private String url;
     private final OkHttpClient client;
     private final ObjectMapper mapper;
+    //    @Value("${adapter.restconsumer.url}")
+    private String url;
 
 
     // these methods are an example that illustrates the implementation of OKHTTP Client.

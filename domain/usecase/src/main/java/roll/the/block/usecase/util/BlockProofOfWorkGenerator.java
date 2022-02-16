@@ -14,6 +14,12 @@ import java.nio.charset.StandardCharsets;
  */
 public class BlockProofOfWorkGenerator {
 
+    public static final String PROOF_OF_WORK = "0000";
+
+    private BlockProofOfWorkGenerator() {
+        throw new AssertionError("Suppress default constructor for non-instantiability");
+    }
+
     /**
      * Simple Proof of Work Algorithm:
      * <p>
@@ -24,19 +30,29 @@ public class BlockProofOfWorkGenerator {
      * <p>
      * Find a number p that when hashed with the previous block’s solution a
      * hash with 4 leading 0s is produced.
+     *
+     * @param lastProof last Block
+     * @return Long proof of work
      */
-    public static String PROOF_OF_WORK = "0000";
-
     public static Long proofOfWork(Long lastProof) {
 
-        Long proof = 0L;
+        long proof = 0L;
 
-        while (validProof(lastProof, proof) != true)
+        while (!validProof(lastProof, proof)) {
             proof += 1L;
+        }
 
         return proof;
     }
 
+    /**
+     * Validates the Proof
+     *
+     * @param lastProof Previous Proof
+     * @param proof     Current Proof
+     * @return True if correct, False if not.
+     */
+    @SuppressWarnings("UnstableApiUsage")
     public static boolean validProof(Long lastProof, Long proof) {
 
         String s = "" + lastProof + "" + proof;

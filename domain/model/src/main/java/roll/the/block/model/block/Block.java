@@ -39,6 +39,13 @@ public class Block {
     private Long proof;
     private String previousHash;
 
+    /**
+     * Creates a SHA-256 hash of a Block
+     *
+     * @param mapper ObjectMapper
+     * @return String hash
+     * @throws JsonProcessingException when error occurs
+     */
     public String hash(ObjectMapper mapper) throws JsonProcessingException {
         String json = mapper.writeValueAsString(this);
         return Hashing.sha256().hashString(json, StandardCharsets.UTF_8).toString();
