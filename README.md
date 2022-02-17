@@ -102,7 +102,7 @@ repository](https://github.com/cristianmarint/roll-the-block/tags).
   [Python approach codebase](https://github.com/dvf/blockchain-book) - [Article](https://hackernoon.com/learn-blockchains-by-building-one-117428612f46)
 
 See also the list of
-[contributors](https://github.com/cristianmarint/THIS.REPO/contributors)
+[contributors](https://github.com/cristianmarint/roll-the-block/contributors)
 who participated in this project.
 
 ## License
