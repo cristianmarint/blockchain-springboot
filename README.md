@@ -1,6 +1,8 @@
 # ROLL THE BLOCK (OR BLOCKCHAIN)
 
-One Paragraph of project description goes here
+Blockchains are immutable, sequential chain of records called Blocks. They can contain transactions, files or any data you like, really. But the important thing is that they’re chained together using hashes.
+
+[Architecture is based on Bancolombia Scaffold](https://github.com/bancolombia/scaffold-clean-architecture) but some liberties were taken
 
 
 ## Summary 📋
